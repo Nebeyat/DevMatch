@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevMatch — Find your dev teammate</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="nav">
+  <div class="logo">&lt;/&gt; DevMatch</div>
+  <div class="nav-links">
+    <button class="btn" onclick="showPage('find')">Find Team</button>
+    <button class="btn" onclick="showPage('motivate')">Inspire</button>
+    <button class="btn btn-primary" onclick="showPage('register')">Register</button>
+  </div>
+</div>
+
+<div id="home" class="page active">
+  <div class="hero">
+    <h1>Build your dream team,<br><span>code without limits</span></h1>
+    <p>Connect with talented developers, find your next teammate, and join a community that lifts every coder up — especially women in tech.</p>
+    <div class="hero-btns">
+      <button class="btn btn-primary" onclick="showPage('register')">Join DevMatch</button>
+      <button class="btn" onclick="showPage('find')">Browse Developers</button>
+      <button class="btn btn-rose" onclick="showPage('motivate')">Women in Tech</button>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num">2,840</div><div class="stat-label">Developers</div></div>
+    <div class="stat-card"><div class="stat-num">640+</div><div class="stat-label">Female devs</div></div>
+    <div class="stat-card"><div class="stat-num">910</div><div class="stat-label">Teams formed</div></div>
+  </div>
+
+  <div class="female-banner">
+    <h2>Supporting women in tech</h2>
+    <p>DevMatch is committed to empowering female developers through mentorship, visibility, and equal opportunities. We believe diverse teams build better software.</p>
+    <div class="quote-card">
+      <p>"I found my co-founder here in just two weeks. DevMatch gave me visibility I never had on other platforms."</p>
+      <div class="author">— Amina K., Full-stack Developer &amp; Startup Founder</div>
+    </div>
+    <button class="btn btn-rose" onclick="showPage('motivate')">See inspiration &amp; resources</button>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Featured developers</div>
+    <div class="dev-grid" id="home-devs"></div>
+  </div>
+</div>
+
+<div id="register" class="page">
+  <div class="section">
+    <div class="section-title">Create your profile</div>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">First name</label><input type="text" placeholder="Sara" id="fname"></div>
+      <div class="form-group"><label class="form-label">Last name</label><input type="text" placeholder="Ahmed" id="lname"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Email</label><input type="email" placeholder="sara@example.com" id="email"></div>
+    <div class="form-group">
+      <label class="form-label">I am a</label>
+      <select id="gender">
+        <option value="">Select...</option>
+        <option value="female">Female developer</option>
+        <option value="male">Male developer</option>
+        <option value="other">Non-binary / other</option>
+        <option value="private">Prefer not to say</option>
+      </select>
+    </div>
+    <div class="form-group"><label class="form-label">Role / title</label><input type="text" placeholder="e.g. React Native Developer" id="role"></div>
+    <div class="form-group">
+      <label class="form-label">Experience level</label>
+      <select id="exp">
+        <option>Junior (0–2 years)</option>
+        <option>Mid-level (2–5 years)</option>
+        <option>Senior (5+ years)</option>
+        <option>Lead / Architect</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Skills (select all that apply)</label>
+      <div class="tag-select" id="skill-tags">
+        <span class="tag-opt" onclick="toggleTag(this)">React Native</span>
+        <span class="tag-opt" onclick="toggleTag(this)">JavaScript</span>
+        <span class="tag-opt" onclick="toggleTag(this)">TypeScript</span>
+        <span class="tag-opt" onclick="toggleTag(this)">Python</span>
+        <span class="tag-opt" onclick="toggleTag(this)">Node.js</span>
+        <span class="tag-opt" onclick="toggleTag(this)">Flutter</span>
+        <span class="tag-opt" onclick="toggleTag(this)">UI/UX</span>
+        <span class="tag-opt" onclick="toggleTag(this)">DevOps</span>
+        <span class="tag-opt" onclick="toggleTag(this)">AI/ML</span>
+        <span class="tag-opt" onclick="toggleTag(this)">Backend</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Looking for</label>
+      <div class="tag-select" id="looking-tags">
+        <span class="tag-opt" onclick="toggleTag(this)">Co-founder</span>
+        <span class="tag-opt" onclick="toggleTag(this)">Hackathon partner</span>
+        <span class="tag-opt" onclick="toggleTag(this)">Open source team</span>
+        <span class="tag-opt" onclick="toggleTag(this)">Freelance collab</span>
+        <span class="tag-opt" onclick="toggleTag(this)">Mentee</span>
+        <span class="tag-opt" onclick="toggleTag(this)">Mentor</span>
+      </div>
+    </div>
+    <div class="form-group"><label class="form-label">Bio</label><textarea placeholder="Tell the community about yourself, your projects, and what you're building..." id="bio"></textarea></div>
+    <button class="btn btn-primary btn-block" onclick="handleRegister()">Create my developer profile</button>
+  </div>
+</div>
+
+<div id="register-success" class="page">
+  <div class="success-box">
+    <div class="success-icon">&#10003;</div>
+    <h2 id="success-name">Welcome!</h2>
+    <p>Your profile is live. Start finding your teammates now.</p>
+    <div id="female-welcome" class="female-welcome-box" style="display:none;">
+      <p class="fw-title">Welcome to the DevMatch women's network!</p>
+      <p class="fw-text">You now have access to our female developer spotlight, mentorship matching, and private support community. You belong here. Keep building.</p>
+    </div>
+    <button class="btn btn-primary" onclick="showPage('find')">Find teammates</button>
+  </div>
+</div>
+
+<div id="find" class="page">
+  <div class="section">
+    <div class="section-title">Find your teammate</div>
+    <input type="text" placeholder="Search by skill, role, name..." id="search-input" oninput="filterDevs()" class="search-input">
+    <div class="filter-row">
+      <button class="btn filter-btn active" onclick="setFilter('all', this)">All</button>
+      <button class="btn filter-btn" onclick="setFilter('female', this)">Female devs</button>
+      <button class="btn filter-btn" onclick="setFilter('frontend', this)">Frontend</button>
+      <button class="btn filter-btn" onclick="setFilter('backend', this)">Backend</button>
+      <button class="btn filter-btn" onclick="setFilter('mobile', this)">Mobile</button>
+    </div>
+    <div class="dev-grid" id="find-devs"></div>
+  </div>
+</div>
+
+<div id="motivate" class="page">
+  <div class="section">
+    <div class="motivate-hero">
+      <h2>Women in tech — you belong here</h2>
+      <p>Every line of code you write matters. Every project you ship matters. The tech world is better because you're in it. This space is yours.</p>
+    </div>
+
+    <div class="section-title">Words to keep you going</div>
+    <div id="quotes-list" class="quotes-list"></div>
+
+    <div class="section-title" style="margin-top:24px;">Resources &amp; support</div>
+    <div class="motivate-grid">
+      <div class="motivate-card">
+        <h3>Mentorship matching</h3>
+        <p>Get paired with a senior female developer who gets your journey and can guide your growth.</p>
+        <button class="btn btn-rose" onclick="toast('Mentorship request sent!')">Request mentor</button>
+      </div>
+      <div class="motivate-card">
+        <h3>Private community</h3>
+        <p>A safe, supportive space to share experiences, ask questions, and celebrate wins together.</p>
+        <button class="btn btn-rose" onclick="toast('Welcome to the community!')">Join community</button>
+      </div>
+      <div class="motivate-card">
+        <h3>Spotlight program</h3>
+        <p>Get featured on our home page and social channels. Your work deserves recognition and visibility.</p>
+        <button class="btn btn-primary" onclick="toast('Nomination submitted!')">Apply for spotlight</button>
+      </div>
+      <div class="motivate-card">
+        <h3>Events &amp; hackathons</h3>
+        <p>Women-friendly hackathons, workshops, and networking events — curated just for you.</p>
+        <button class="btn btn-rose" onclick="toast('Events calendar opened!')">Browse events</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
